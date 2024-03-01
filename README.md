@@ -12,6 +12,10 @@ cargo build --release
 ```
 
 ```
+cp src/target/server /bin/server
+```
+
+```
 mkdir /var/www
 ```
 
