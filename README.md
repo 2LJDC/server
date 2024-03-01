@@ -4,5 +4,5 @@ mkdir /var/www
 ```
 
 ```
-adduser limiteduser --shell=/bin/false --no-create-home
+adduser srv --shell=/bin/false --no-create-home
 ```
