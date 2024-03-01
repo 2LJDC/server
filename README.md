@@ -33,3 +33,16 @@ systemctl start server.service
 ```
 systemctl enable server.service
 ```
+### sneaky way for more mem on vServer
+```
+dd if=/dev/zero of=/swapfile bs=1M count=8192 
+```
+```
+chmod 0600 /swapfile
+```
+```
+mkswap /swapfile 
+```
+```
+swapon /swapfile 
+```
