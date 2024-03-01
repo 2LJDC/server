@@ -22,3 +22,11 @@ mkdir /var/www
 ```
 adduser srv --shell=/bin/false --no-create-home
 ```
+
+```
+wget https://raw.githubusercontent.com/CasinoMLU/server/main/server.service
+```
+
+```
+mv server.service /etc/systemd/system/server.service
+```
