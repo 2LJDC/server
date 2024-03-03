@@ -46,6 +46,10 @@ mkswap /swapfile
 ```
 swapon /swapfile 
 ```
+/etc/fstab 
+```
+/swapfile         none           swap     sw                       0    0
+```
 ### certbot
 ```
 dnf install -y epel-release
