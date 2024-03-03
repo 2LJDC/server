@@ -12,7 +12,7 @@ chmod +x build.sh
 ./build.sh
 ```
 ```
-cp src/target/server /bin/server
+cp target/release/server /bin/server
 ```
 
 ### /var/www
