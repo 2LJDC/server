@@ -1,12 +1,15 @@
 # server
 ```
-git clone https://github.com/CasinoMLU/server/tree/main
+git clone https://github.com/CasinoMLU/server
 ```
 ```
 cd server
 ```
 ```
-cargo build --release
+chmod +x build.sh
+```
+```
+./build.sh
 ```
 ```
 cp src/target/server /bin/server
