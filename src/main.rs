@@ -1,7 +1,7 @@
 use actix_web::{get, App, HttpResponse, HttpServer, Responder};
 use std::fs;
 
-
+/*
 #[get("/Stylesheet.css")]
 async fn get_css() -> impl Responder {
     let css = fs::read_to_string("/var/www/Stylesheet.css").expect("Cannot read CSS file");
@@ -9,6 +9,7 @@ async fn get_css() -> impl Responder {
         .content_type("text/css")
         .body(css)
 }
+*/
 
 #[get("/style.css")]
 async fn get_css() -> impl Responder {
@@ -19,7 +20,7 @@ async fn get_css() -> impl Responder {
 }
 
 #[get("/srv-pic-2.webp")]
-async fn get_css() -> impl Responder {
+async fn get_pic() -> impl Responder {
     let file = fs::NamedFile::open("/var/www/srv-pic-2.webp")?;
     Ok(file
         .use_last_modified(true)
