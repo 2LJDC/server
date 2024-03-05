@@ -1,4 +1,4 @@
-use actix_web::http::header::{ContentDisposition, DispositionType}
+use actix_web::http::header::{ContentDisposition, DispositionType};
 use actix_web::{get, App, HttpResponse, HttpServer, Responder};
 use std::fs;
 
@@ -22,7 +22,7 @@ async fn get_css() -> impl Responder {
 
 #[get("/srv-pic-2.webp")]
 async fn get_pic() -> impl Responder {
-    let file = fs::NamedFile::open("/var/www/srv-pic-2.webp")?;
+    let file = fs::NamedFile::open("/var/www/srv-pic-2.webp").expect("Cannot read webp file");
     Ok(file
         .use_last_modified(true)
         .set_content_disposition(ContentDisposition {
@@ -33,7 +33,7 @@ async fn get_pic() -> impl Responder {
 
 #[get("/")]
 async fn index() -> impl Responder {
-    let data = fs::read_to_string("/var/www/index.html").expect("Cannot read CSS file");
+    let data = fs::read_to_string("/var/www/index.html").expect("Cannot read index file");
     HttpResponse::Ok()
         .content_type("text/html")
         .body(data)
