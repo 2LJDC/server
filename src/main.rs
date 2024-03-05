@@ -27,9 +27,10 @@ async fn get_css() -> impl Responder {
 #[get("/srv-pic-2.webp")]
 async fn get_pic() -> Result<afs::NamedFile, Error> {
     let data = std::fs::read("/var/www/srv-pic-2.webp").expect("Cannot read webp file");
-        HttpResponse::Ok()
+    HttpResponse::Ok()
         .content_type("image/webp")
         .body(data)
+}
     /*
     let file = afs::NamedFile::open("/var/www/srv-pic-2.webp").expect("Cannot read webp file");
     Ok(file
@@ -39,7 +40,7 @@ async fn get_pic() -> Result<afs::NamedFile, Error> {
             parameters: vec![],
         }))
     */
-}
+
 
 
 #[get("/")]
