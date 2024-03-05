@@ -22,7 +22,7 @@ async fn get_css() -> impl Responder {
 }
 
 #[get("/srv-pic-2.webp")]
-async fn get_pic() -> impl Responder -> Result<fs::NamedFile, Error> {
+async fn get_pic() -> Result<fs::NamedFile, Error> {
     let file = afs::NamedFile::open("/var/www/srv-pic-2.webp").expect("Cannot read webp file");
     Ok(file
         .use_last_modified(true)
