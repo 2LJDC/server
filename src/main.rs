@@ -2,6 +2,8 @@ use actix_web::http::header::{ContentDisposition, DispositionType};
 use actix_web::{get, App, Error, HttpResponse, HttpServer, Responder};
 use actix_files as afs;
 use std::fs;
+use std::io::BufReader;
+use std::io::Read;
 
 /*
 #[get("/Stylesheet.css")]
@@ -23,6 +25,11 @@ async fn get_css() -> impl Responder {
 
 #[get("/srv-pic-2.webp")]
 async fn get_pic() -> Result<afs::NamedFile, Error> {
+    let file = std::fs::read("/var/www/srv-pic-2.webp").expect("Cannot read webp file");
+        HttpResponse::Ok()
+        .content_type("image/webp")
+        .body(data)
+    /*
     let file = afs::NamedFile::open("/var/www/srv-pic-2.webp").expect("Cannot read webp file");
     Ok(file
         .use_last_modified(true)
@@ -30,6 +37,7 @@ async fn get_pic() -> Result<afs::NamedFile, Error> {
             disposition: DispositionType::Attachment,
             parameters: vec![],
         }))
+    */
 }
 
 #[get("/")]
