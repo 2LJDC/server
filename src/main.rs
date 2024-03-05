@@ -17,7 +17,8 @@ async fn get_css() -> impl Responder {
 
 #[get("/style.css")]
 async fn get_css() -> impl Responder {
-    let css = fs::read_to_string("/var/www/style.css").expect("Cannot read CSS file");
+    //let css = fs::read_to_string("/var/www/style.css").expect("Cannot read CSS file");
+    let css = std::fs::read("/var/www/style.css").expect("Cannot read CSS file");
     HttpResponse::Ok()
         .content_type("text/css")
         .body(css)
