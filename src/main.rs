@@ -55,7 +55,7 @@ async fn index() -> impl Responder {
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
-        App::new()
+        App::new().service(fs::Files::new("/var/www", ".").show_files_listing())
             .service(get_css)
             .service(index)
     })
