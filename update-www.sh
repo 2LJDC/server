@@ -1,3 +1,3 @@
 #!/bin/bash
-#git clone 
-#mv ligma /www/
+git clone https://github.com/CasinoMLU/Website
+mv Website/* /var/www/
