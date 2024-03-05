@@ -1,6 +1,6 @@
 use actix_web::http::header::{ContentDisposition, DispositionType};
 use actix_web::{get, App, HttpResponse, HttpServer, Responder};
-use actix_files as afs
+use actix_files as afs;
 use std::fs;
 
 /*
