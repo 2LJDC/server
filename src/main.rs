@@ -1,5 +1,6 @@
 use actix_web::http::header::{ContentDisposition, DispositionType};
 use actix_web::{get, App, HttpResponse, HttpServer, Responder};
+use actix_files as afs
 use std::fs;
 
 /*
@@ -22,7 +23,7 @@ async fn get_css() -> impl Responder {
 
 #[get("/srv-pic-2.webp")]
 async fn get_pic() -> impl Responder {
-    let file = fs::NamedFile::open("/var/www/srv-pic-2.webp").expect("Cannot read webp file");
+    let file = afs::NamedFile::open("/var/www/srv-pic-2.webp").expect("Cannot read webp file");
     Ok(file
         .use_last_modified(true)
         .set_content_disposition(ContentDisposition {
