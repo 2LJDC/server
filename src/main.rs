@@ -80,6 +80,18 @@ async fn root() -> impl Responder {
         .body(data)
 }
 
+
+// cookie cookies.js
+#[get("/cookies.js")]
+async fn cookies() -> impl Responder {
+    //let data = fs::read_to_string("/var/www/index.html").expect("Cannot read index file");
+    let data = std::fs::read("/var/www/cookies.js").expect("Cannot read index file");
+    HttpResponse::Ok()
+        .content_type("text/javascript")
+        .body(data)
+}
+
+
 // API
 #[put("/submit")]
 async fn submit(req_body: String) -> impl Responder {
@@ -115,6 +127,7 @@ async fn main() -> std::io::Result<()> {
 	    .service(root)
 	    .service(lib)
 	    .service(update)
+	    .service(cookies)
 	    
     })
     .bind(("127.0.0.1", 8080))?
