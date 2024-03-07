@@ -12,8 +12,8 @@ git clone https://github.com/CasinoMLU/Website
 
 #rm -Rf /var/www/*
 
-mv -f var/www/update/Website/* /var/www/
+mv -f /var/www/update/Website/* /var/www/
 
-rm -Rf var/www/update/Website
+rm -Rf /var/www/update/Website
 
 echo "Done"
