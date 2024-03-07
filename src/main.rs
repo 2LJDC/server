@@ -93,7 +93,7 @@ async fn update(req_body: String) -> impl Responder {
 		let mut cmd = Command::new("bash");
 		cmd.arg("update-www.sh");
 	}
-	println!("update..."y);
+	println!("update...");
     HttpResponse::Ok()
 }
 
