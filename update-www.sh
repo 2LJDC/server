@@ -1,19 +1,17 @@
 #!/bin/bash
 
-if [ ! -d /tmp/website ]; then
-	mkdir /tmp/website
-else
+if [ -d /tmp/Website ]; then
 	rm -Rf /tmp/website/*
 fi
 
-cd /tmp/website
+cd /tmp
 
 git clone https://github.com/CasinoMLU/Website
 
 #rm -Rf /var/www/*
 
-mv -f /tmp/website/* /var/www/
+mv -f /tmp/Website/* /var/www/
 
-rm -Rf Website/
+rm -Rf /tmp/Website
 
 echo "Done"
