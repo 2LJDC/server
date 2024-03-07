@@ -101,7 +101,7 @@ async fn main() -> std::io::Result<()> {
             .service(index)
             .service(submit)
 	    .service(formular)
-	    .service(formular.js)
+	    .service(formularjs)
 	    
     })
     .bind(("127.0.0.1", 8080))?
