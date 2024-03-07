@@ -24,11 +24,11 @@ async fn get_css() -> impl Responder {
         .body(css)
 }
 
-#[get("/srv-pic-2.webp")]
-async fn get_pic() -> impl Responder {
-    let data = std::fs::read("/var/www/srv-pic-2.webp").expect("Cannot read webp file");
+#[get("/favicon.ico")]
+async fn get_icon() -> impl Responder {
+    let data = std::fs::read("/var/www/graphics/favicon.ico").expect("Cannot read webp file");
     HttpResponse::Ok()
-        .content_type("image/webp")
+        .content_type("image/vnd.microsoft.icon")
         .body(data)
 }
     /*
@@ -65,6 +65,8 @@ async fn index() -> impl Responder {
         .content_type("text/html")
         .body(data)
 }
+
+/*
 #[get("/app.js")]
 async fn app() -> impl Responder {
     //let data = fs::read_to_string("/var/www/index.html").expect("Cannot read index file");
@@ -73,6 +75,8 @@ async fn app() -> impl Responder {
         .content_type("text/javascript")
         .body(data)
 }
+*/
+
 #[get("/library.js")]
 async fn lib() -> impl Responder {
     //let data = fs::read_to_string("/var/www/index.html").expect("Cannot read index file");
@@ -85,7 +89,7 @@ async fn lib() -> impl Responder {
 #[get("/")]
 async fn root() -> impl Responder {
     //let data = fs::read_to_string("/var/www/index.html").expect("Cannot read index file");
-    let data = std::fs::read("/var/www/index.html").expect("Cannot read index file");
+    let data = std::fs::read("/var/www/2LJDC.html").expect("Cannot read index file");
     HttpResponse::Ok()
         .content_type("text/html")
         .body(data)
@@ -120,14 +124,13 @@ async fn main() -> std::io::Result<()> {
         App::new()
             //.service(afs::Files::new("/style.css", "/var/www/style.css"))
             //.service(afs::Files::new("/srv-pic-2.webp", "/var/www/srv-pic-2.webp"))
-            .service(get_pic)
+            .service(get_icon)
             .service(get_css)
             .service(index)
             .service(submit)
 	    .service(formular)
 	    .service(formularjs)
 	    .service(root)
-	    .service(app)
 	    .service(lib)
 	    
     })
