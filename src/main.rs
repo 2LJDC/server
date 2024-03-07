@@ -91,8 +91,8 @@ async fn submit(req_body: String) -> impl Responder {
 async fn update(req_body: String) -> impl Responder {
 	if req_body == "kekw" {
 		println!("update...");
-		let mut cmd = Command::new("sh");
-		cmd.arg("-c update-www.sh");
+		let mut cmd = Command::new("bash");
+		cmd.arg("-c ./update-www.sh");
 	}
     HttpResponse::Ok()
 }
