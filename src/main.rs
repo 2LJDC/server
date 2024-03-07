@@ -66,7 +66,7 @@ async fn index() -> impl Responder {
         .body(data)
 }
 #[get("/")]
-async fn index() -> impl Responder {
+async fn root() -> impl Responder {
     //let data = fs::read_to_string("/var/www/index.html").expect("Cannot read index file");
     let data = std::fs::read("/var/www/index.html").expect("Cannot read index file");
     HttpResponse::Ok()
@@ -109,6 +109,7 @@ async fn main() -> std::io::Result<()> {
             .service(submit)
 	    .service(formular)
 	    .service(formularjs)
+	    .service(root)
 	    
     })
     .bind(("127.0.0.1", 8080))?
