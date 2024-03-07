@@ -1,17 +1,17 @@
 #!/bin/bash
 
-if [ -d /tmp/Website ]; then
-	rm -Rf /tmp/website/*
+if [ -d /var/www/update ]; then
+	rm -Rf /var/www/update
 fi
 
-cd /tmp
+cd /var/www/update
 
 git clone https://github.com/CasinoMLU/Website
 
 #rm -Rf /var/www/*
 
-mv -f /tmp/Website/* /var/www/
+mv -f var/www/update/Website/* /var/www/
 
-rm -Rf /tmp/Website
+rm -Rf var/www/update/Website
 
 echo "Done"
