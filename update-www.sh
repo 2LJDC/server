@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -d /tmp/website ]; then
+if [ ! -d /tmp/website ]; then
 	mkdir /tmp/website
 else
 	rm -Rf /tmp/website/*
