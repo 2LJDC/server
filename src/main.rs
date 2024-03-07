@@ -83,7 +83,7 @@ async fn root() -> impl Responder {
 // API
 #[put("/submit")]
 async fn submit(req_body: String) -> impl Responder {
-	println!("{}", req_body);
+	println!("{:?}", req_body);
     HttpResponse::Ok()
 }
 // UPDATE
