@@ -41,6 +41,27 @@ async fn get_pic() -> impl Responder {
         }))
     */
 
+#[get("/formular")]
+async fn formular() -> impl Responder {
+    //let data = fs::read_to_string("/var/www/index.html").expect("Cannot read index file");
+    let data = std::fs::read("/var/www/formular.html").expect("Cannot read index file");
+    HttpResponse::Ok()
+        .content_type("text/html")
+        .body(data)
+}
+#[get("/formular.js")]
+async fn formularjs() -> impl Responder {
+    //let data = fs::read_to_string("/var/www/index.html").expect("Cannot read index file");
+    let data = std::fs::read("/var/www/formular.js").expect("Cannot read index file");
+    HttpResponse::Ok()
+        .content_type("text/javascript")
+        .body(data)
+}
+
+
+
+
+
 
 #[put("/submit")]
 async fn submit(req_body: String) -> impl Responder {
