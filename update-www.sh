@@ -4,6 +4,8 @@ if [ -d /var/www/update ]; then
 	rm -Rf /var/www/update
 fi
 
+mkdir /var/www/update
+
 cd /var/www/update
 
 git clone https://github.com/CasinoMLU/Website
