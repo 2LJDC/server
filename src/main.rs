@@ -65,6 +65,23 @@ async fn index() -> impl Responder {
         .content_type("text/html")
         .body(data)
 }
+#[get("/app.js")]
+async fn app() -> impl Responder {
+    //let data = fs::read_to_string("/var/www/index.html").expect("Cannot read index file");
+    let data = std::fs::read("/var/www/app.js").expect("Cannot read index file");
+    HttpResponse::Ok()
+        .content_type("text/javascript")
+        .body(data)
+}
+#[get("/library.js")]
+async fn lib() -> impl Responder {
+    //let data = fs::read_to_string("/var/www/index.html").expect("Cannot read index file");
+    let data = std::fs::read("/var/www/library.js").expect("Cannot read index file");
+    HttpResponse::Ok()
+        .content_type("text/javascript")
+        .body(data)
+}
+
 #[get("/")]
 async fn root() -> impl Responder {
     //let data = fs::read_to_string("/var/www/index.html").expect("Cannot read index file");
@@ -110,6 +127,8 @@ async fn main() -> std::io::Result<()> {
 	    .service(formular)
 	    .service(formularjs)
 	    .service(root)
+	    .service(app)
+	    .service(lib)
 	    
     })
     .bind(("127.0.0.1", 8080))?
