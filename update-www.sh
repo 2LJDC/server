@@ -3,7 +3,7 @@
 if [ -d /tmp/website ]; then
 	mkdir /tmp/website
 else
-	rm -Rf /tmp/Website*
+	rm -Rf /tmp/website*
 fi
 
 cd /tmp/website
