@@ -1,6 +1,7 @@
 //use actix_web::http::header::{ContentDisposition, DispositionType};
 //use actix_web::{put, get, App, Error, HttpResponse, HttpServer, Responder};
 use actix_web::{put, get, App, HttpResponse, HttpServer, Responder};
+use std::process::Command;
 
 //use actix_files as afs;
 //use std::fs;
@@ -79,11 +80,23 @@ async fn root() -> impl Responder {
         .body(data)
 }
 
+// API
 #[put("/submit")]
 async fn submit(req_body: String) -> impl Responder {
 	println!("{}", req_body);
     HttpResponse::Ok()
 }
+// UPDATE
+#[put("/update")]
+async fn update(req_body: String) -> impl Responder {
+	if req_body == "kekw" {
+		let mut cmd = Command::new("bash");
+		cmd.arg("update-www.sh");
+	}
+	println!("update..."y);
+    HttpResponse::Ok()
+}
+
 
 
 #[actix_web::main]
@@ -100,6 +113,7 @@ async fn main() -> std::io::Result<()> {
 	    .service(formularjs)
 	    .service(root)
 	    .service(lib)
+	    .service(update)
 	    
     })
     .bind(("127.0.0.1", 8080))?
