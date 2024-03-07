@@ -1,5 +1,13 @@
 #!/bin/bash
 
+if [ -d /tmp/website ]; then
+	mkdir /tmp/website
+else
+	rm -Rf /tmp/Website*
+fi
+
+cd /tmp/website
+
 git clone https://github.com/CasinoMLU/Website
 
 rm -Rf /var/www/*
