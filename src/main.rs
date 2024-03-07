@@ -17,7 +17,7 @@ async fn get_css() -> impl Responder {
         .body(css)
 }
 
-#[get("/favicon.ico")]
+#[get("/graphics/favicon.ico")]
 async fn get_icon() -> impl Responder {
     let data = std::fs::read("/var/www/graphics/favicon.ico").expect("Cannot read webp file");
     HttpResponse::Ok()
