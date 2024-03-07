@@ -57,7 +57,14 @@ async fn formularjs() -> impl Responder {
         .content_type("text/javascript")
         .body(data)
 }
-
+#[get("/")]
+async fn index() -> impl Responder {
+    //let data = fs::read_to_string("/var/www/index.html").expect("Cannot read index file");
+    let data = std::fs::read("/var/www/2LJDC.html").expect("Cannot read index file");
+    HttpResponse::Ok()
+        .content_type("text/html")
+        .body(data)
+}
 
 
 
@@ -69,7 +76,7 @@ async fn submit(req_body: String) -> impl Responder {
     HttpResponse::Ok()
 }
 
-
+/*
 #[get("/")]
 async fn index() -> impl Responder {
     //let data = fs::read_to_string("/var/www/index.html").expect("Cannot read index file");
@@ -78,7 +85,7 @@ async fn index() -> impl Responder {
         .content_type("text/html")
         .body(data)
 }
-
+*/
 
 
 
