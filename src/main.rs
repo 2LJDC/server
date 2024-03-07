@@ -41,7 +41,7 @@ async fn get_pic() -> impl Responder {
         }))
     */
 
-#[get("/formular")]
+#[get("/formular.html")]
 async fn formular() -> impl Responder {
     //let data = fs::read_to_string("/var/www/index.html").expect("Cannot read index file");
     let data = std::fs::read("/var/www/formular.html").expect("Cannot read index file");
@@ -100,6 +100,9 @@ async fn main() -> std::io::Result<()> {
             .service(get_css)
             .service(index)
             .service(submit)
+	    .service(formular)
+	    .service(formular.js)
+	    
     })
     .bind(("127.0.0.1", 8080))?
     .run()
