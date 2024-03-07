@@ -1,5 +1,5 @@
 //use actix_web::http::header::{ContentDisposition, DispositionType};
-use actix_web::{get, App, Error, HttpResponse, HttpServer, Responder};
+use actix_web::{put, get, App, Error, HttpResponse, HttpServer, Responder};
 //use actix_files as afs;
 //use std::fs;
 //use std::io::BufReader;
@@ -42,6 +42,12 @@ async fn get_pic() -> impl Responder {
     */
 
 
+#[put("/submit")]
+async fn submit(req_body: String) -> impl Responder {
+	println!("{}", req_body);
+    HttpResponse::Ok()
+}
+
 
 #[get("/")]
 async fn index() -> impl Responder {
@@ -65,6 +71,7 @@ async fn main() -> std::io::Result<()> {
             .service(get_pic)
             .service(get_css)
             .service(index)
+            .service(submit)
     })
     .bind(("127.0.0.1", 8080))?
     .run()
