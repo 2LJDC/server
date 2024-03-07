@@ -1,19 +1,12 @@
 //use actix_web::http::header::{ContentDisposition, DispositionType};
-use actix_web::{put, get, App, Error, HttpResponse, HttpServer, Responder};
+//use actix_web::{put, get, App, Error, HttpResponse, HttpServer, Responder};
+use actix_web::{put, get, App, HttpResponse, HttpServer, Responder};
+
 //use actix_files as afs;
 //use std::fs;
 //use std::io::BufReader;
 //use std::io::Read;
 
-/*
-#[get("/Stylesheet.css")]
-async fn get_css() -> impl Responder {
-    let css = fs::read_to_string("/var/www/Stylesheet.css").expect("Cannot read CSS file");
-    HttpResponse::Ok()
-        .content_type("text/css")
-        .body(css)
-}
-*/
 
 #[get("/style.css")]
 async fn get_css() -> impl Responder {
@@ -49,6 +42,7 @@ async fn formular() -> impl Responder {
         .content_type("text/html")
         .body(data)
 }
+
 #[get("/formular.js")]
 async fn formularjs() -> impl Responder {
     //let data = fs::read_to_string("/var/www/index.html").expect("Cannot read index file");
@@ -57,6 +51,7 @@ async fn formularjs() -> impl Responder {
         .content_type("text/javascript")
         .body(data)
 }
+
 #[get("/2LJDC.html")]
 async fn index() -> impl Responder {
     //let data = fs::read_to_string("/var/www/index.html").expect("Cannot read index file");
@@ -65,17 +60,6 @@ async fn index() -> impl Responder {
         .content_type("text/html")
         .body(data)
 }
-
-/*
-#[get("/app.js")]
-async fn app() -> impl Responder {
-    //let data = fs::read_to_string("/var/www/index.html").expect("Cannot read index file");
-    let data = std::fs::read("/var/www/app.js").expect("Cannot read index file");
-    HttpResponse::Ok()
-        .content_type("text/javascript")
-        .body(data)
-}
-*/
 
 #[get("/library.js")]
 async fn lib() -> impl Responder {
@@ -95,27 +79,11 @@ async fn root() -> impl Responder {
         .body(data)
 }
 
-
-
-
 #[put("/submit")]
 async fn submit(req_body: String) -> impl Responder {
 	println!("{}", req_body);
     HttpResponse::Ok()
 }
-
-/*
-#[get("/")]
-async fn index() -> impl Responder {
-    //let data = fs::read_to_string("/var/www/index.html").expect("Cannot read index file");
-    let data = std::fs::read("/var/www/index.html").expect("Cannot read index file");
-    HttpResponse::Ok()
-        .content_type("text/html")
-        .body(data)
-}
-*/
-
-
 
 
 #[actix_web::main]
