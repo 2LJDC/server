@@ -92,7 +92,7 @@ async fn update(req_body: String) -> impl Responder {
 	if req_body == "kekw" {
 		println!("update...");
 		let mut cmd = Command::new("bash");
-		cmd.arg("-c").arg("./update-www.sh");
+		let _ = cmd.arg("-c").arg("./update-www.sh").output().expect("failed to execute update");
 	}
     HttpResponse::Ok()
 }
