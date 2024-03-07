@@ -10,9 +10,9 @@ cd /tmp/website
 
 git clone https://github.com/CasinoMLU/Website
 
-rm -Rf /var/www/*
+#rm -Rf /var/www/*
 
-mv Website/* /var/www/
+mv -f /tmp/website/* /var/www/
 
 rm -Rf Website/
 
