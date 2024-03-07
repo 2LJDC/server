@@ -7,3 +7,5 @@ rm .Rf /var/www/*
 mv Website/* /var/www/
 
 rm -Rf Website/
+
+echo "Done"
