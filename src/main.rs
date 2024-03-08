@@ -150,7 +150,7 @@ async fn main() -> std::io::Result<()> {
 	    .service(cookies)
 	    .service(get_logo)
 	    .service(get_logo2x)
-	    .service(fs::Files::new("/static", ".")
+	    .service(fs::Files::new("/static", "."))
 
 	    //.service(afs::Files::new("/var/www", "."))
 
