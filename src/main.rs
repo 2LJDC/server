@@ -136,8 +136,8 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
 	    //.service(fs::Files::new("/static", ".")
-            .service(afs::Files::new("/style.css", "/var/www/style.css"))
-            .service(afs::Files::new("/srv-pic-2.webp", "/var/www/srv-pic-2.webp"))
+            //.service(afs::Files::new("/style.css", "/var/www/style.css"))
+            //.service(afs::Files::new("/srv-pic-2.webp", "/var/www/srv-pic-2.webp"))
             .service(get_icon)
             .service(get_css)
             .service(index)
