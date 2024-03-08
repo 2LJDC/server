@@ -8,7 +8,7 @@ use actix_files as afs;
 //use std::io::BufReader;
 //use std::io::Read;
 
-
+/*
 #[get("/style.css")]
 async fn get_css() -> impl Responder {
     //let css = fs::read_to_string("/var/www/style.css").expect("Cannot read CSS file");
@@ -44,7 +44,7 @@ async fn get_logo2x() -> impl Responder {
         .body(data)
 }
 
-    /*
+    
     let file = afs::NamedFile::open("/var/www/srv-pic-2.webp").expect("Cannot read webp file");
     Ok(file
         .use_last_modified(true)
@@ -52,7 +52,7 @@ async fn get_logo2x() -> impl Responder {
             disposition: DispositionType::Attachment,
             parameters: vec![],
         }))
-    */
+    
 
 #[get("/formular.html")]
 async fn formular() -> impl Responder {
@@ -71,7 +71,7 @@ async fn formularjs() -> impl Responder {
         .content_type("text/javascript")
         .body(data)
 }
-
+*/
 #[get("/2LJDC.html")]
 async fn index() -> impl Responder {
     //let data = fs::read_to_string("/var/www/index.html").expect("Cannot read index file");
@@ -80,7 +80,7 @@ async fn index() -> impl Responder {
         .content_type("text/html")
         .body(data)
 }
-
+/*
 #[get("/library.js")]
 async fn lib() -> impl Responder {
     //let data = fs::read_to_string("/var/www/index.html").expect("Cannot read index file");
@@ -89,7 +89,7 @@ async fn lib() -> impl Responder {
         .content_type("text/javascript")
         .body(data)
 }
-
+*/
 #[get("/")]
 async fn root() -> impl Responder {
     //let data = fs::read_to_string("/var/www/index.html").expect("Cannot read index file");
@@ -99,7 +99,7 @@ async fn root() -> impl Responder {
         .body(data)
 }
 
-
+/*
 // cookie cookies.js
 #[get("/cookies.js")]
 async fn cookies() -> impl Responder {
@@ -109,7 +109,7 @@ async fn cookies() -> impl Responder {
         .content_type("text/javascript")
         .body(data)
 }
-
+*/
 
 // API
 #[put("/submit")]
