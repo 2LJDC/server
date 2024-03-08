@@ -148,8 +148,8 @@ async fn main() -> std::io::Result<()> {
 	    .service(lib)
 	    .service(update)
 	    .service(cookies)
-	    .service(get_logo)
-	    .service(get_logo2x)
+	    //.service(get_logo)
+	    //.service(get_logo2x)
 	    .service(afs::Files::new("/", "/var/www"))
 
 	    //.service(afs::Files::new("/var/www", "."))
