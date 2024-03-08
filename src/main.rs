@@ -3,7 +3,7 @@
 use actix_web::{web, put, get, App, HttpResponse, HttpServer, Responder};
 use std::process::Command;
 
-//use actix_files as afs;
+use actix_files as afs;
 //use std::fs;
 //use std::io::BufReader;
 //use std::io::Read;
@@ -150,7 +150,7 @@ async fn main() -> std::io::Result<()> {
 	    .service(cookies)
 	    //.service(get_logo)
 	    //.service(get_logo2x)
-	    .service(fs::Files::new("/static", ".")
+	    .service(afs::Files::new("/static", ".")
 
     })
     .bind(("127.0.0.1", 8080))?
