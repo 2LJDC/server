@@ -148,10 +148,8 @@ async fn main() -> std::io::Result<()> {
 	    .service(lib)
 	    .service(update)
 	    .service(cookies)
-	    //.service(get_logo)
-	    //.service(get_logo2x)
-	    .route("/Logo.png", ("/graphics/Logo.png", HttpResponse::Ok().content_type("image/vnd.microsoft.icon").body(std::fs::read("/var/www/graphics/Logo.png").expect("Cannot read webp file"))))
-	    .route("/Logo.png", ("/graphics/Logo2x.png", HttpResponse::Ok().content_type("image/vnd.microsoft.icon").body(std::fs::read("/var/www/graphics/Logo2x.png").expect("Cannot read webp file"))))
+	    .service(get_logo)
+	    .service(get_logo2x)
 
 	    //.service(afs::Files::new("/var/www", "."))
 
