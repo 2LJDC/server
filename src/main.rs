@@ -150,7 +150,7 @@ async fn main() -> std::io::Result<()> {
 	    .service(cookies)
 	    //.service(get_logo)
 	    //.service(get_logo2x)
-	    .service(afs::Files::new("/static", ".")
+	    .service(afs::Files::new("/static", "."))
 
     })
     .bind(("127.0.0.1", 8080))?
