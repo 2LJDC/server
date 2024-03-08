@@ -147,7 +147,9 @@ async fn main() -> std::io::Result<()> {
 	    .service(lib)
 	    .service(update)
 	    .service(cookies)
-	    
+	    .service(get_logo)
+	    .service(get_logo2x)
+
     })
     .bind(("127.0.0.1", 8080))?
     .run()
