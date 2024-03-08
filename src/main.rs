@@ -18,6 +18,7 @@ async fn get_css() -> impl Responder {
         .body(css)
 }
 
+// favicon.ico
 #[get("/graphics/favicon.ico")]
 async fn get_icon() -> impl Responder {
     let data = std::fs::read("/var/www/graphics/favicon.ico").expect("Cannot read webp file");
@@ -25,6 +26,24 @@ async fn get_icon() -> impl Responder {
         .content_type("image/vnd.microsoft.icon")
         .body(data)
 }
+
+// Logo.png
+#[get("/graphics/Logo.png")]
+async fn get_logo() -> impl Responder {
+    let data = std::fs::read("/var/www/graphics/Logo.png").expect("Cannot read webp file");
+    HttpResponse::Ok()
+        .content_type("image/vnd.microsoft.icon")
+        .body(data)
+}
+// Logo2x.png
+#[get("/graphics/Logo2x.png")]
+async fn get_logo2x() -> impl Responder {
+    let data = std::fs::read("/var/www/graphics/Logo2x.png").expect("Cannot read webp file");
+    HttpResponse::Ok()
+        .content_type("image/vnd.microsoft.icon")
+        .body(data)
+}
+
     /*
     let file = afs::NamedFile::open("/var/www/srv-pic-2.webp").expect("Cannot read webp file");
     Ok(file
