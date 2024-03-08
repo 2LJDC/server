@@ -3,7 +3,7 @@
 use actix_web::{web, put, get, App, HttpResponse, HttpServer, Responder};
 use std::process::Command;
 
-use actix_files as afs;
+use actix_files as fs;
 
 // index
 #[get("/")]
@@ -45,7 +45,7 @@ async fn main() -> std::io::Result<()> {
             .service(index)
             .service(submit)
 	    .service(update)
-	    .service(afs::Files::new("/", "/var/www"))
+	    .service(fs::Files::new("/", "/var/www"))
 	    
     })
     .bind(("127.0.0.1", 8080))?
