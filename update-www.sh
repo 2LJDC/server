@@ -4,6 +4,10 @@ if [ -d /var/www/ ]; then
 	rm -Rf /var/www/*
 fi
 
+if [ -d /var/www/graphics ]; then
+	rm -Rf /var/www/graphics
+fi
+
 cd /var/www/
 
 git clone https://github.com/CasinoMLU/Website
