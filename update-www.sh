@@ -1,19 +1,15 @@
 #!/bin/bash
 
-if [ -d /var/www/update ]; then
-	rm -Rf /var/www/update
+if [ -d /var/www/ ]; then
+	rm -Rf /var/www/*
 fi
 
-rm -Rf /var/www/*
-
-mkdir /var/www/update
-
-cd /var/www/update
+cd /var/www/
 
 git clone https://github.com/CasinoMLU/Website
 
-mv -f /var/www/update/Website/* /var/www/
+mv -f /var/www/Website/* /var/www/
 
-rm -Rf /var/www/update/Website
+rm -Rf /var/www/Website
 
 echo "Done"
