@@ -91,7 +91,7 @@ async fn update(req_body: String) -> impl Responder {
 // postgres
 async fn add_customer(customer: JsonValue) -> Result<(), Box<dyn Error>> {
 	let url = "postgres://postgres:deeznuts@85.215.154.152:5432";
-	let conn = sqlx::postgres::PgPool::connect(url).await?;
+	let pool = sqlx::postgres::PgPool::connect(url).await?;
 	
 	let query = "INSERT INTO kunde (anrede, name, geburtsdatum, mail, tel, vorlage, farbe, eigeneVorstellungen, sonstiges) VALUES ($1, $2, $3)";
 
