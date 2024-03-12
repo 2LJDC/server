@@ -47,7 +47,8 @@ async fn index() -> impl Responder {
 // submit
 #[put("/submit")]
 async fn submit(req_body: String) -> impl Responder {
-	println!("{}", req_body);
+	let s = req_body.replace("#", "");
+	println!("{}", s);
     HttpResponse::Ok()
 }
 // UPDATE
