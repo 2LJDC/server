@@ -3,6 +3,8 @@ use actix_web::{put, get, App, HttpResponse, HttpServer, Responder};
 use std::process::Command;
 use actix_files as fs;
 
+
+//config
 #[derive(serde::Deserialize)]
 pub struct Settings{
 	pub database: DatabaseSettings,
@@ -49,9 +51,13 @@ async fn index() -> impl Responder {
 async fn submit(req_body: String) -> impl Responder {
 	let s = req_body.replace("#", "");
 	let data = json::parse(&s).unwrap();
-	println!("{}{}", data["name"], data["mail"]);
+	//println!("{}{}", data["name"], data["mail"]);
+	add_customer(data);
+
     HttpResponse::Ok()
 }
+
+
 // UPDATE
 #[put("/update")]
 async fn update(req_body: String) -> impl Responder {
@@ -63,6 +69,22 @@ async fn update(req_body: String) -> impl Responder {
 	}
     HttpResponse::Ok()
 }
+
+// postgres
+async fn add_customer(customer, pool: &sqlx::PgPool) -> Result<(), Box<dyn Error>> {
+	let query = "INSERT INTO kunde (anrede, name, geburtsdatum, mail, tel, vorlage, farbe, eigeneVorstellungen, sonstiges) VALUES ($1, $2, $3)";
+
+	sqlx::query(query)
+		.bind(customer[""])
+		.bind(customer[""])
+		.bind(customer[""])
+		.execute(pool)
+		.await?;
+	
+	Ok(())
+}
+
+
 
 
 
