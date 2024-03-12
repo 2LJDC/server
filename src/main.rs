@@ -63,9 +63,7 @@ async fn index() -> impl Responder {
 // submit
 #[put("/submit")]
 async fn submit(req_body: String) -> impl Responder {
-
-
-	match add_customer(data).await {
+	match add_customer(req_body).await {
 		Ok(()) => HttpResponse::Ok(),
 		Err(_) => HttpResponse::Ok(),
 	};
