@@ -48,7 +48,8 @@ async fn index() -> impl Responder {
 #[put("/submit")]
 async fn submit(req_body: String) -> impl Responder {
 	let s = req_body.replace("#", "");
-	println!("{}", s);
+	let data = json::parse(s).unwrap();
+	println!("{}{}", data["name"], data["mail"]);
     HttpResponse::Ok()
 }
 // UPDATE
