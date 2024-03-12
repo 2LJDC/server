@@ -5,7 +5,7 @@ use actix_files as fs;
 use std::error::Error;
 
 
-/*
+
 //config
 #[derive(serde::Deserialize)]
 pub struct Settings{
@@ -31,7 +31,7 @@ pub fn get_configuration() -> Result<Settings, config::ConfigError> {
 		.build()?;
 	settings.try_deserialize::<Settings>()
 }
-*/
+
 
 
 
