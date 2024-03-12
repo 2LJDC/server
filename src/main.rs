@@ -47,7 +47,7 @@ async fn index() -> impl Responder {
 // submit
 #[put("/submit")]
 async fn submit(req_body: String) -> impl Responder {
-	println!("{:?}", req_body);
+	println!("{}", req_body);
     HttpResponse::Ok()
 }
 // UPDATE
@@ -57,7 +57,7 @@ async fn update(req_body: String) -> impl Responder {
 		println!("update...");
 		let mut cmd = Command::new("bash");
 		let out = cmd.arg("-c").arg("update-www.sh").output().expect("failed to execute update");
-		println!("{}", out);
+		println!("{:?}", out);
 	}
     HttpResponse::Ok()
 }
