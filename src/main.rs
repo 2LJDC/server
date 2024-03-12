@@ -109,7 +109,7 @@ async fn add_customer(c_string: String) -> Result<(), Box<dyn Error>> {
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     let configuration = get_configuration().expect("Failed to read config");
-    let address = format!("{}:{}", configuration.host, configuration.port);
+    let address = format!("{}:{}", configuration.host, configuration.application_port);
     println!("{}", address);
 	
     HttpServer::new(|| {
