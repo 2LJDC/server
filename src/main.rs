@@ -117,7 +117,8 @@ async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn Error
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     let configuration = get_configuration().expect("Failed to read config");
-    let address = format!("{}:{}", configuration.database.host, configuration.database.port);
+    //let address = format!("{}:{}", configuration.database.host, configuration.database.port);
+    let address = format!("postgres://{}:{}@{}:{}/{}",self.username, self.password, self.host, self.port, self.database_name)
     println!("databse: {}", address);
 	
     HttpServer::new(|| {
