@@ -63,9 +63,7 @@ async fn index() -> impl Responder {
 // submit
 #[put("/submit")]
 async fn submit(req_body: String) -> impl Responder {
-	let s = req_body.replace("#", "");
-	let data = json::parse(&s).unwrap();
-	println!("{}{}", data["name"], data["mail"]);
+
 
 	match add_customer(data).await {
 		Ok(()) => HttpResponse::Ok(),
@@ -90,7 +88,11 @@ async fn update(req_body: String) -> impl Responder {
 
 
 // postgres
-async fn add_customer(customer: JsonValue) -> Result<(), Box<dyn Error>> {
+async fn add_customer(c_string: String) -> Result<(), Box<dyn Error>> {
+	let s = c_string.replace("#", "");
+	let data = json::parse(&s).unwrap();
+	println!("{}{}", data["name"], data["mail"]);
+	
 	let url = "postgres://postgres:deeznuts@85.215.154.152:5432";
 	let pool = sqlx::postgres::PgPool::connect(url).await?;
 	
