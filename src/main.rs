@@ -94,7 +94,7 @@ async fn add_customer(c_string: String) -> Result<(), Box<dyn Error>> {
 	let url = "postgres://postgres:deeznuts@85.215.154.152:5432";
 	let pool = sqlx::postgres::PgPool::connect(url).await?;
 	
-	let query = "INSERT INTO kunde (anrede, name, geburtsdatum, mail, tel, vorlage, farbe, eigeneVorstellungen, sonstiges) VALUES ($1, $2, $3)";
+	let query = "INSERT INTO kunde (anrede, name, geburtsdatum, mail, tel, vorlage, farbe, eigeneVorstellungen, sonstiges) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)";
 
 	sqlx::query(query)
 		.bind(&customer["anrede"].to_string())
