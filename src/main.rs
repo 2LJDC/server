@@ -29,9 +29,19 @@ pub fn get_configuration() -> Result<Settings, config::ConfigError> {
 	settings.try_deserialize::<Settings>()
 }
 
-
-
-
+/*
+struct Kunde {
+	pub anrede: String,
+	pub name: String,
+	pub geburtsdatum: String,
+	pub mail: String,
+	pub tel
+	pub vorlage: String,
+	pub farbe: String,
+	pub eigeneVorstellungen: String,
+	pub sonstiges: String,
+}
+*/
 
 // index
 #[get("/")]
@@ -52,7 +62,9 @@ async fn submit(req_body: String) -> impl Responder {
 	let s = req_body.replace("#", "");
 	let data = json::parse(&s).unwrap();
 	//println!("{}{}", data["name"], data["mail"]);
-	add_customer(data);
+	let url = "postgres://postgres:deeznuts@85.215.154.152:5432";
+	let conn = sqlx::postgres::PgPool::connect(url).await?;
+	add_customer(data, &conn);
 
     HttpResponse::Ok()
 }
@@ -75,9 +87,15 @@ async fn add_customer(customer, pool: &sqlx::PgPool) -> Result<(), Box<dyn Error
 	let query = "INSERT INTO kunde (anrede, name, geburtsdatum, mail, tel, vorlage, farbe, eigeneVorstellungen, sonstiges) VALUES ($1, $2, $3)";
 
 	sqlx::query(query)
-		.bind(customer[""])
-		.bind(customer[""])
-		.bind(customer[""])
+		.bind(customer["anrede"])
+		.bind(customer["name"])
+		.bind(customer["geburtstag"])
+		.bind(customer["mail"])
+		.bind(customer["tel"])
+		.bind(customer["vorlage"])
+		.bind(customer["farbe"])
+		.bind(customer["eigeneVorstellungen"])
+		.bind(customer["sonstiges"])
 		.execute(pool)
 		.await?;
 	
