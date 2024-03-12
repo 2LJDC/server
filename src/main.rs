@@ -118,7 +118,7 @@ async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn Error
 async fn main() -> std::io::Result<()> {
     let configuration = get_configuration().expect("Failed to read config");
     //let address = format!("{}:{}", configuration.database.host, configuration.database.port);
-    let address = format!("postgres://{}:{}@{}:{}/{}",self.username, self.password, self.host, self.port, self.database_name)
+    let address = configuration.database.connection_string();
     println!("databse: {}", address);
 	
     HttpServer::new(|| {
