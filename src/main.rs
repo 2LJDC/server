@@ -97,15 +97,15 @@ async fn add_customer(c_string: String) -> Result<(), Box<dyn Error>> {
 	let query = "INSERT INTO kunde (anrede, name, geburtsdatum, mail, tel, vorlage, farbe, eigeneVorstellungen, sonstiges) VALUES ($1, $2, $3)";
 
 	sqlx::query(query)
-		.bind(&customer["anrede"])
-		.bind(&customer["name"])
-		.bind(&customer["geburtstag"])
-		.bind(&customer["mail"])
-		.bind(&customer["tel"])
-		.bind(&customer["vorlage"])
-		.bind(&customer["farbe"])
-		.bind(&customer["eigeneVorstellungen"])
-		.bind(&customer["sonstiges"])
+		.bind(&customer["anrede"].to_string())
+		.bind(&customer["name"].to_string())
+		.bind(&customer["geburtstag"].to_string())
+		.bind(&customer["mail"].to_string())
+		.bind(&customer["tel"].to_string())
+		.bind(&customer["vorlage"].to_string())
+		.bind(&customer["farbe"].to_string())
+		.bind(&customer["eigeneVorstellungen"].to_string())
+		.bind(&customer["sonstiges"].to_string())
 		.execute(&pool)
 		.await?;
 	
