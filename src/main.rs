@@ -67,8 +67,8 @@ async fn submit(req_body: String) -> impl Responder {
 	println!("{}{}", data["name"], data["mail"]);
 
 	match add_customer(data).await {
-		Ok(()) => HttpResponse::Ok()
-		Err(_) => HttpResponse::Ok()
+		Ok(()) => HttpResponse::Ok(),
+		Err(_) => HttpResponse::Ok(),
 	};
 
     HttpResponse::Ok()
