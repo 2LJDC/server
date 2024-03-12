@@ -26,7 +26,7 @@ pub struct DatabaseSettings {
 
 impl DatabaseSettings {
 	pub fn connection_string(&self) -> String {
-		format!("postgres://{}:{}@/=/{}",self.username, self.password, self.host, self.port, self.database_name)
+		format!("postgres://{}:{}@{}:{}/{}",self.username, self.password, self.host, self.port, self.database_name)
 	}
 }
 
@@ -56,7 +56,8 @@ async fn index() -> impl Responder {
 // submit
 #[put("/submit")]
 async fn submit(req_body: String) -> impl Responder {
-	match add_customer(req_body).await {
+	let url =
+	match add_customer(req_body, url).await {
 		Ok(()) => HttpResponse::Ok(),
 		Err(_) => HttpResponse::Ok(),
 	};
@@ -79,12 +80,12 @@ async fn update(req_body: String) -> impl Responder {
 
 
 // postgres
-async fn add_customer(c_string: String) -> Result<(), Box<dyn Error>> {
+async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn Error>> {
 	let s = c_string.replace("#", "");
 	let customer = json::parse(&s).unwrap();
 	println!("add:{},{}", customer["name"], customer["mail"]);
 	
-	let url = "postgres://postgres:deeznuts@85.215.154.152:5432";
+	//let url = "postgres://postgres:deeznuts@85.215.154.152:5432";
 	let pool = sqlx::postgres::PgPool::connect(url).await?;
 	
 	let query = "INSERT INTO kunde (anrede, name, geburtsdatum, mail, tel, vorlage, farbe, eigeneVorstellungen, sonstiges) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)";
