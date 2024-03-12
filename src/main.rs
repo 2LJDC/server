@@ -61,9 +61,9 @@ async fn index() -> impl Responder {
 async fn submit(req_body: String) -> impl Responder {
 	let s = req_body.replace("#", "");
 	let data = json::parse(&s).unwrap();
-	//println!("{}{}", data["name"], data["mail"]);
+	println!("{}{}", data["name"], data["mail"]);
 
-	add_customer(data).await?;
+	//add_customer(data).await?;
 
     HttpResponse::Ok()
 }
