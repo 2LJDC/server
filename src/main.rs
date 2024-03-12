@@ -89,13 +89,13 @@ async fn update(req_body: String) -> impl Responder {
 async fn add_customer(c_string: String) -> Result<(), Box<dyn Error>> {
 	let s = c_string.replace("#", "");
 	let customer = json::parse(&s).unwrap();
-	println!("{}{}", customer["name"], customer["mail"]);
+	println!("add:{},{}", customer["name"], customer["mail"]);
 	
 	let url = "postgres://postgres:deeznuts@85.215.154.152:5432";
 	let pool = sqlx::postgres::PgPool::connect(url).await?;
 	
 	let query = "INSERT INTO kunde (anrede, name, geburtsdatum, mail, tel, vorlage, farbe, eigeneVorstellungen, sonstiges) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)";
-
+	println!("send data...");
 	sqlx::query(query)
 		.bind(&customer["anrede"].to_string())
 		.bind(&customer["name"].to_string())
@@ -109,6 +109,8 @@ async fn add_customer(c_string: String) -> Result<(), Box<dyn Error>> {
 		.execute(&pool)
 		.await?;
 	
+	println!("done");
+
 	Ok(())
 }
 
