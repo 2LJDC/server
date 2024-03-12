@@ -83,7 +83,7 @@ async fn update(req_body: String) -> impl Responder {
 }
 
 // postgres
-async fn add_customer(customer: usize, pool: &sqlx::PgPool) -> Result<(), Box<dyn Error>> {
+async fn add_customer(customer: JsonValue, pool: &sqlx::PgPool) -> Result<(), Box<dyn Error>> {
 	let query = "INSERT INTO kunde (anrede, name, geburtsdatum, mail, tel, vorlage, farbe, eigeneVorstellungen, sonstiges) VALUES ($1, $2, $3)";
 
 	sqlx::query(query)
