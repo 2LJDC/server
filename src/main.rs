@@ -64,7 +64,7 @@ async fn submit(req_body: String) -> impl Responder {
 	//println!("{}{}", data["name"], data["mail"]);
 	let url = "postgres://postgres:deeznuts@85.215.154.152:5432";
 	let conn = sqlx::postgres::PgPool::connect(url).await?;
-	add_customer(data, &conn);
+	add_customer(data, &conn).await?;
 
     HttpResponse::Ok()
 }
