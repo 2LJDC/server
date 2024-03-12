@@ -56,7 +56,9 @@ async fn index() -> impl Responder {
 // submit
 #[put("/submit")]
 async fn submit(req_body: String) -> impl Responder {
-	let url =
+	let configuration = get_configuration().expect("Failed to read config");
+	let url = configuration.database.connection_string();
+		
 	match add_customer(req_body, url).await {
 		Ok(()) => HttpResponse::Ok(),
 		Err(_) => HttpResponse::Ok(),
