@@ -81,6 +81,7 @@ async fn update(req_body: String) -> impl Responder {
     HttpResponse::Ok()
 }
 
+/*
 // postgres
 async fn add_customer(customer: JsonValue) -> Result<(), Box<dyn Error>> {
 	let url = "postgres://postgres:deeznuts@85.215.154.152:5432";
@@ -103,7 +104,7 @@ async fn add_customer(customer: JsonValue) -> Result<(), Box<dyn Error>> {
 	
 	Ok(())
 }
-
+*/
 
 
 
