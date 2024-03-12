@@ -3,6 +3,7 @@ use actix_web::{put, get, App, HttpResponse, HttpServer, Responder};
 use std::process::Command;
 use actix_files as fs;
 use std::error::Error;
+use json::JsonValue;
 
 /*
 //config
@@ -105,7 +106,7 @@ async fn add_customer(customer: JsonValue) -> Result<(), Box<dyn Error>> {
 		.bind(customer["farbe"])
 		.bind(customer["eigeneVorstellungen"])
 		.bind(customer["sonstiges"])
-		.execute(pool)
+		.execute(&pool)
 		.await?;
 	
 	Ok(())
