@@ -62,9 +62,8 @@ async fn submit(req_body: String) -> impl Responder {
 	let s = req_body.replace("#", "");
 	let data = json::parse(&s).unwrap();
 	//println!("{}{}", data["name"], data["mail"]);
-	let url = "postgres://postgres:deeznuts@85.215.154.152:5432";
-	let conn = sqlx::postgres::PgPool::connect(url).await?;
-	add_customer(data, &conn).await?;
+
+	add_customer(data).await?;
 
     HttpResponse::Ok()
 }
@@ -84,6 +83,9 @@ async fn update(req_body: String) -> impl Responder {
 
 // postgres
 async fn add_customer(customer: JsonValue, pool: &sqlx::PgPool) -> Result<(), Box<dyn Error>> {
+	let url = "postgres://postgres:deeznuts@85.215.154.152:5432";
+	let conn = sqlx::postgres::PgPool::connect(url).await?;
+	
 	let query = "INSERT INTO kunde (anrede, name, geburtsdatum, mail, tel, vorlage, farbe, eigeneVorstellungen, sonstiges) VALUES ($1, $2, $3)";
 
 	sqlx::query(query)
