@@ -33,19 +33,7 @@ pub fn get_configuration() -> Result<Settings, config::ConfigError> {
 }
 */
 
-/*
-struct Kunde {
-	pub anrede: String,
-	pub name: String,
-	pub geburtsdatum: String,
-	pub mail: String,
-	pub tel
-	pub vorlage: String,
-	pub farbe: String,
-	pub eigeneVorstellungen: String,
-	pub sonstiges: String,
-}
-*/
+
 
 // index
 #[get("/")]
