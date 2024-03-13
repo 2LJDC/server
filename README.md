@@ -1,4 +1,6 @@
 # server
+
+### setup
 ```
 git clone https://github.com/CasinoMLU/server
 ```
@@ -6,14 +8,22 @@ git clone https://github.com/CasinoMLU/server
 cd server
 ```
 ```
-chmod +x build.sh
+bash build.sh
 ```
 ```
-./build.sh
+sed...
 ```
 ```
-cp target/release/server /bin/server
+bash install.sh
 ```
+### check database
+```
+PGPASSWORD="key" psql -U postgres -h 127.0.0.1 -p 5432
+```
+```
+SELECT * FROM kunde;
+```
+
 
 ### /var/www
 ```
