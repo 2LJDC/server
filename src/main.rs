@@ -89,7 +89,6 @@ async fn update(req_body: String) -> impl Responder {
 async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn Error>> {
 	let s = c_string.replace("#", "");
 	let customer = json::parse(&s).unwrap();
-	//println!("add:{},{}", customer["name"], customer["mail"]);
 	
 	let pool = sqlx::postgres::PgPool::connect(&url).await?;
 	
