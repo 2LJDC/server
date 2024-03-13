@@ -93,7 +93,7 @@ async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn Error
 	let pool = sqlx::postgres::PgPool::connect(&url).await?;
 	
 	let query = "INSERT INTO kunde (anrede, name, geburtsdatum, mail, tel, vorlage, farbe, eigeneVorstellungen, sonstiges) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)";
-	println!("send data...");
+	//println!("send data...");
 	sqlx::query(query)
 		.bind(&customer["anrede"].to_string())
 		.bind(&customer["name"].to_string())
@@ -107,7 +107,7 @@ async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn Error
 		.execute(&pool)
 		.await?;
 	
-	println!("done");
+	//println!("done");
 
 	Ok(())
 }
