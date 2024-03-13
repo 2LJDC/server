@@ -58,6 +58,7 @@ async fn index() -> impl Responder {
 async fn submit(req_body: String) -> impl Responder {
 	let configuration = get_configuration().expect("Failed to read config");
 	let url = configuration.database.connection_string();
+	println!("{}", &url);
 	println!("{}", &req_body);
 	
 	match add_customer(req_body, url).await {
@@ -86,7 +87,7 @@ async fn update(req_body: String) -> impl Responder {
 async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn Error>> {
 	let s = c_string.replace("#", "");
 	let customer = json::parse(&s).unwrap();
-	println!("add:{},{}", customer["name"], customer["mail"]);
+	//println!("add:{},{}", customer["name"], customer["mail"]);
 	
 	let pool = sqlx::postgres::PgPool::connect(&url).await?;
 	
