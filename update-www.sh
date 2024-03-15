@@ -10,7 +10,7 @@ fi
 
 cd /var/www/
 
-git clone https://github.com/CasinoMLU/Website
+git clone https://github.com/2LJDCU/Website
 
 mv -f /var/www/Website/* /var/www/
 
