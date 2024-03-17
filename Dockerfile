@@ -8,7 +8,7 @@ COPY configuration.yaml /app/configuration.yaml
 
 COPY www/* /app/www
 
-RUN chmod 755 mini-server
+RUN chmod 755 server
 
 EXPOSE 8000
 
