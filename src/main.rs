@@ -34,7 +34,7 @@ impl DatabaseSettings {
 
 pub fn get_configuration() -> Result<Settings, config::ConfigError> {
 	let settings = config::Config::builder()
-		.add_source(config::File::new("/var/server_conf/configuration.yaml", config::FileFormat::Yaml))
+		.add_source(config::File::new("/app/configuration.yaml", config::FileFormat::Yaml))
 		.build()?;
 	settings.try_deserialize::<Settings>()
 }
@@ -46,7 +46,7 @@ pub fn get_configuration() -> Result<Settings, config::ConfigError> {
 #[get("/")]
 async fn index() -> impl Responder {
     //let data = fs::read_to_string("/var/www/index.html").expect("Cannot read index file");
-    let data = std::fs::read("/var/www/2LJDC.html").expect("Cannot read index file");
+    let data = std::fs::read("/app/www/2LJDC.html").expect("Cannot read index file");
     HttpResponse::Ok()
         .content_type("text/html")
         .body(data)
@@ -128,7 +128,7 @@ async fn main() -> std::io::Result<()> {
             .service(index)
             .service(submit)
 	    .service(update)
-	    .service(fs::Files::new("/", "/var/www"))
+	    .service(fs::Files::new("/", "/app/www"))
 	    
     })
     .bind(("0.0.0.0", 8080))?
