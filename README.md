@@ -22,6 +22,11 @@ sed...
 ```
 docker build -t 2ljdc-server .
 ```
+```
+docker run -d -p 0.0.0.0:80:8000 2ljdc-server
+```
+
+
 ### check database
 ```
 PGPASSWORD="key" psql -U postgres -h 127.0.0.1 -p 5432
