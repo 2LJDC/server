@@ -8,6 +8,12 @@ git https://github.com/2LJDC/server
 cd server
 ```
 ```
+https://github.com/2LJDC/Website
+```
+```
+mv Website/ www/
+```
+```
 bash build.sh
 ```
 ```
