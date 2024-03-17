@@ -2,7 +2,7 @@ FROM debian:12-slim
 
 WORKDIR /app
 
-COPY target/release/mini-server /app/server
+COPY target/release/server /app/server
 
 COPY configuration.yaml /app/configuration.yaml
 
