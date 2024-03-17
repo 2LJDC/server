@@ -6,7 +6,7 @@ COPY target/release/server /app/server
 
 COPY configuration.yaml /app/configuration.yaml
 
-COPY www/* /app/www
+COPY www/ /app/www
 
 RUN chmod 755 server
 
