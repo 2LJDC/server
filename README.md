@@ -2,7 +2,7 @@
 
 ### setup
 ```
-git clone https://github.com/CasinoMLU/server
+git https://github.com/2LJDC/server
 ```
 ```
 cd server
@@ -14,7 +14,7 @@ bash build.sh
 sed...
 ```
 ```
-bash install.sh
+docker build -t 2ljdc-server .
 ```
 ### check database
 ```
