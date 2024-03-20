@@ -14,16 +14,13 @@ https://github.com/2LJDC/Website
 mv Website/ www/
 ```
 ```
-bash build.sh
+cargo build --release
 ```
 ```
-sed...
+podman build -t 2ljdc-server .
 ```
 ```
-docker build -t 2ljdc-server .
-```
-```
-docker run -d -p 0.0.0.0:80:8000 2ljdc-server
+podman run -dt --name 2ljdc -p 0.0.0.0:80:8000 2ljdc-server
 ```
 
 
