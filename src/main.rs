@@ -123,13 +123,11 @@ async fn main() -> std::io::Result<()> {
     //let address = configuration.database.connection_string();
     //println!("databse: {}", address);
 
-    let mut builder = SslAcceptor::mozilla_intermediate(SslMethod::tls()).unwrap();
-	
+     let mut builder = SslAcceptor::mozilla_intermediate(SslMethod::tls()).unwrap();
     builder
-        .set_private_key_file("2ljdc.de.key", SslFiletype::PEM)
+        .set_private_key_file("key.pem", SslFiletype::PEM)
         .unwrap();
-	
-    builder.set_certificate_chain_file("2ljdc.de.csr").unwrap();
+    builder.set_certificate_chain_file("cert.pem").unwrap();
 	
     HttpServer::new(|| {
         App::new()
