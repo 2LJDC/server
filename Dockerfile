@@ -1,4 +1,4 @@
-FROM almalinux:8-minimal
+FROM almalinux:minimal
 
 WORKDIR /app
 
