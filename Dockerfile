@@ -8,9 +8,9 @@ COPY configuration.yaml /app/configuration.yaml
 
 COPY www/ /app/www
 
-COPY key.pem /app/key.pem
+#COPY key.pem /app/key.pem
 
-COPY cert.pem /app/cert.pem
+#COPY cert.pem /app/cert.pem
 
 RUN chmod 755 server
 
