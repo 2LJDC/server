@@ -137,7 +137,7 @@ async fn main() -> std::io::Result<()> {
 	    .service(fs::Files::new("/", "/app/www"))
 	    
     })
-    .bind(("0.0.0.0", 8000))?
+    .bind_openssl("0.0.0.0:433, builder)?
     .run()
     .await
 }
