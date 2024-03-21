@@ -26,7 +26,7 @@ cargo build --release
 podman build -t 2ljdc-server .
 ```
 ```
-podman run -dt --name 2ljdc -p 0.0.0.0:80:8000 2ljdc-server
+podman run -dt --name 2ljdc -p 0.0.0.0:443:8000 2ljdc-server
 ```
 
 
