@@ -122,13 +122,13 @@ async fn main() -> std::io::Result<()> {
     //let address = format!("{}:{}", configuration.database.host, configuration.database.port);
     //let address = configuration.database.connection_string();
     //println!("databse: {}", address);
-/*
+
      let mut builder = SslAcceptor::mozilla_intermediate(SslMethod::tls()).unwrap();
     builder
         .set_private_key_file("key.pem", SslFiletype::PEM)
         .unwrap();
     builder.set_certificate_chain_file("cert.pem").unwrap();
-*/
+
     HttpServer::new(|| {
         App::new()
             .service(index)
