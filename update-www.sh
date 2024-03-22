@@ -1,19 +1,19 @@
 #!/bin/bash
 
 if [ -d /var/www/ ]; then
-	rm -Rf /var/www/*
+	rm -Rf /app/www/*
 fi
 
 if [ -d /var/www/graphics ]; then
-	rm -Rf /var/www/graphics
+	rm -Rf /app/www/graphics
 fi
 
-cd /var/www/
+cd /app/www/
 
 git clone https://github.com/2LJDCU/Website
 
-mv -f /var/www/Website/* /var/www/
+mv -f /app/www/Website/* /app/www/
 
-rm -Rf /var/www/Website
+rm -Rf /app/www/Website
 
 echo "Done"
