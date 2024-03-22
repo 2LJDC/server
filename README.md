@@ -2,13 +2,13 @@
 
 ### setup
 ```
-git https://github.com/2LJDC/server
+git clone https://github.com/2LJDC/server
 ```
 ```
 cd server
 ```
 ```
-https://github.com/2LJDC/Website
+gitr clone https://github.com/2LJDC/Website
 ```
 ```
 mv Website/ www/
