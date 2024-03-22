@@ -1,4 +1,4 @@
-FROM almalinux:minimal
+FROM debian:stable
 
 WORKDIR /app
 
