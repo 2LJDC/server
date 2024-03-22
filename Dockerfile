@@ -6,6 +6,8 @@ COPY target/release/server /app/server
 
 COPY configuration.yaml /app/configuration.yaml
 
+COPY update-www.sh /app/update-www.sh
+
 COPY www/ /app/www
 
 COPY key.pem /app/key.pem
