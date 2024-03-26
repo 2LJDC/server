@@ -75,8 +75,8 @@ async fn submit(req_body: String) -> impl Responder {
 	let url = configuration.database.connection_string();
 	
 	match add_customer(req_body, url) {
-		Ok() => HttpResponse::Ok(),
-		Err() => HttpResponse::Ok(),
+		Ok(()) => HttpResponse::Ok(),
+		Err(_) => HttpResponse::Ok(),
 	};
 
     HttpResponse::Ok()
@@ -104,7 +104,7 @@ fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> 
 		.bind(&customer["eigeneVorstellungen"].to_string())
 		.bind(&customer["sonstiges"].to_string())
 		.execute(&pool)?;
-	Ok()
+	Ok(())
 }
 
 
