@@ -31,10 +31,10 @@ impl DatabaseSettings {
 	pub fn connection_string(&self) -> String {
 		//format!("postgres://{}:{}@{}:{}/{}",self.username, self.password, self.host, self.port, self.database_name)
 		format!("postgres://{}:{}@{}:{}",self.username, self.password, self.host, self.port)
-
 	}
 }
 
+// get config
 pub fn get_configuration() -> Result<Settings, config::ConfigError> {
 	let settings = config::Config::builder()
 		.add_source(config::File::new("/app/configuration.yaml", config::FileFormat::Yaml))
@@ -58,12 +58,9 @@ async fn status() -> String {
 // ------API------
 
 // submit
-#[put("/submit")]
 async fn submit(req_body: String) -> impl Responder {
 	let configuration = get_configuration().expect("Failed to read config");
 	let url = configuration.database.connection_string();
-	//println!("{}", &url);
-	//println!("{}", &req_body);
 	
 	match add_customer(req_body, url) {
 		Ok(()) => HttpResponse::Ok(),
@@ -86,7 +83,7 @@ async fn update(req_body: String) -> impl Responder {
 }
 
 
-// postgres
+// DATABASE postgres
 fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> {
 	let s = c_string.replace("#", "");
 	let customer = json::parse(&s).unwrap();
@@ -94,7 +91,7 @@ fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> 
 	let pool = sqlx::postgres::PgPool::connect(&url).await?;
 	
 	let query = "INSERT INTO kunde (anrede, name, geburtsdatum, mail, tel, vorlage, farbe, eigeneVorstellungen, sonstiges) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)";
-	//println!("send data...");
+
 	sqlx::query(query)
 		.bind(&customer["anrede"].to_string())
 		.bind(&customer["name"].to_string())
@@ -132,7 +129,7 @@ async fn main() -> std::io::Result<()> {
 		App::new()
 			.route("/status", web::get().to(status))
 			.route("/", web::get().to(index))
-			.service(submit)
+			.route("/submit", web::get().to(submit))
 			.route("/update", web::get().to(update))
 			.service(fs::Files::new("/", "/app/www"))
 			.default_service(web::get().to(index))
