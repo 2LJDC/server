@@ -103,7 +103,7 @@ async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdEr
 		.bind(&customer["farbe"].to_string())
 		.bind(&customer["eigeneVorstellungen"].to_string())
 		.bind(&customer["sonstiges"].to_string())
-		.execute(&pool){
+		.execute(&pool).await {
 			Ok(()) => Ok(()),
 			Err(e) => Err(e),
 		}
