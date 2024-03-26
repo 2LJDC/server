@@ -7,6 +7,7 @@ use openssl::ssl::{SslAcceptor, SslFiletype, SslMethod};
 
 use actix_web::HttpRequest;
 use actix_web::Error;
+use actix_web::{web, http::header};
 
 //config
 #[derive(serde::Deserialize)]
