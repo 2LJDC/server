@@ -75,8 +75,8 @@ async fn submit(req_body: String) -> impl Responder {
 	let url = configuration.database.connection_string();
 	
 	match add_customer(req_body, url) {
-		Ok(()) => HttpResponse::Ok(),
-		Err(_) => HttpResponse::Ok(),
+		Ok() => HttpResponse::Ok(),
+		Err() => HttpResponse::Ok(),
 	};
 
     HttpResponse::Ok()
