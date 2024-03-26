@@ -43,15 +43,26 @@ pub fn get_configuration() -> Result<Settings, config::ConfigError> {
 
 
 // index
-#[get("/")]
+/*#[get("/")]
 async fn index() -> impl Responder {
     //let data = fs::read_to_string("/var/www/index.html").expect("Cannot read index file");
     let data = std::fs::read("/app/www/2LJDC.html").expect("Cannot read index file");
     HttpResponse::Ok()
         .content_type("text/html")
         .body(data)
+}*/
+
+// index
+async fn index(req: HttpRequest) -> Result<fs::NamedFile, Error> {
+    let file = fs::NamedFile::open("/app/www/index.html")?;
+    Ok(file)
 }
 
+
+// status
+async fn status() -> String {
+    "Server is up and running.".to_string()
+}
 
 // ------API------
 
@@ -131,10 +142,13 @@ async fn main() -> std::io::Result<()> {
 
     HttpServer::new(|| {
         App::new()
-            .service(index)
-            .service(submit)
-	    .service(update)
-	    .service(fs::Files::new("/", "/app/www"))
+            //.service(index)
+		.route("/status", web::get().to(status))
+		.route("/", web::get().to(index))
+		.service(submit)
+		.service(update)
+		.service(fs::Files::new("/", "/app/www"))
+		.default_service(web::get().to(index))
 	    
     })
     .bind_openssl("0.0.0.0:8000", builder)?
