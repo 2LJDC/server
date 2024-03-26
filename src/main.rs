@@ -2,7 +2,7 @@
 use actix_web::{put, get, App, HttpResponse, HttpServer, Responder};
 use std::process::Command;
 use actix_files as fs;
-//use std::error::Error;
+use std::error::stdError;
 use openssl::ssl::{SslAcceptor, SslFiletype, SslMethod};
 
 use actix_web::HttpRequest;
@@ -99,7 +99,7 @@ async fn update(req_body: String) -> impl Responder {
 
 
 // postgres
-async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn Error>> {
+async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> {
 	let s = c_string.replace("#", "");
 	let customer = json::parse(&s).unwrap();
 	
