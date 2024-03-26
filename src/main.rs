@@ -79,7 +79,7 @@ async fn submit(req_body: String) -> impl Responder {
 		Err(_) => HttpResponse::Ok(),
 	};
 
-	//HttpResponse::Ok()
+	HttpResponse::Ok()
 }
 
 // DATABASE postgres
@@ -89,7 +89,13 @@ async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdEr
 	let s = c_string.replace("#", "");
 	let customer = json::parse(&s).unwrap();
 	
-	let pool = sqlx::postgres::PgPool::connect(&url).await?;
+	//let pool = sqlx::postgres::PgPool::connect(&url).await?;
+	let pool = match sqlx::postgres::PgPool::connect(&url).await.Ok() {
+		None => Err(Box::new(e),
+		Some(p) => p,
+	}
+
+
 	
 	let query = "INSERT INTO kunde (anrede, name, geburtsdatum, mail, tel, vorlage, farbe, eigeneVorstellungen, sonstiges) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)";
 
@@ -105,8 +111,7 @@ async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdEr
 		.bind(&customer["sonstiges"].to_string())
 		.execute(&pool).await {
 			Ok(_) => Ok(()),
-			//Err(e) => Err(Box::new(e)),
-			Err(_) => Err(()),
+			Err(e) => Err(Box::new(e)),
 		}
 
 
