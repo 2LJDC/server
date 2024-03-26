@@ -76,7 +76,7 @@ async fn submit(req_body: String) -> impl Responder {
 	
 	match add_customer(req_body, url).await {
 		Ok(()) => HttpResponse::Ok(),
-		Err(_) => HttpResponse::Ok(),
+		Err(_) => HttpResponse::BadRequest(),
 	};
 
 	HttpResponse::Ok()
