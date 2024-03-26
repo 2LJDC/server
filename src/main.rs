@@ -74,7 +74,7 @@ async fn submit(req_body: String) -> impl Responder {
 	let configuration = get_configuration().expect("Failed to read config");
 	let url = configuration.database.connection_string();
 	
-	match add_customer(req_body, url).await {
+	match add_customer(req_body, url) {
 		Ok(()) => HttpResponse::Ok(),
 		Err(_) => HttpResponse::Ok(),
 	};
@@ -83,14 +83,14 @@ async fn submit(req_body: String) -> impl Responder {
 }
 
 // DATABASE postgres
-async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> {
+fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> {
 //fn add_customer(c_string: String, url: String) -> Result<(), Error> {
 
 	let s = c_string.replace("#", "");
 	let customer = json::parse(&s).unwrap();
 	
 	//let pool = sqlx::postgres::PgPool::connect(&url).await?;
-	let pool = match sqlx::postgres::PgPool::connect(&url).await {
+	let pool = match sqlx::postgres::PgPool::connect(&url) {
 		Ok(p) => p,
 		Err(e) => return Err(Box::new(e)),
 	};
@@ -109,7 +109,7 @@ async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdEr
 		.bind(&customer["farbe"].to_string())
 		.bind(&customer["eigeneVorstellungen"].to_string())
 		.bind(&customer["sonstiges"].to_string())
-		.execute(&pool).await {
+		.execute(&pool) {
 			Ok(_) => Ok(()),
 			Err(e) => Err(Box::new(e)),
 		}
