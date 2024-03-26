@@ -90,9 +90,9 @@ async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdEr
 	let customer = json::parse(&s).unwrap();
 	
 	//let pool = sqlx::postgres::PgPool::connect(&url).await?;
-	let pool = match sqlx::postgres::PgPool::connect(&url).await.Ok() {
-		None => Err(Box::new(_)),
-		Some(p) => p,
+	let pool = match sqlx::postgres::PgPool::connect(&url).await {
+		Ok(p) => p,
+		Err(error) => return Err(Box::new(e)),
 	};
 
 
