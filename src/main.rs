@@ -104,7 +104,7 @@ fn add_customer(c_string: String, url: String) -> Result<()> {
 		.bind(&customer["eigeneVorstellungen"].to_string())
 		.bind(&customer["sonstiges"].to_string())
 		.execute(&pool)?;
-	Ok(())
+	Ok()
 }
 
 
