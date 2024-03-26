@@ -79,7 +79,7 @@ async fn submit(req_body: String) -> impl Responder {
 		Err(_) => HttpResponse::Ok(),
 	};
 
-    HttpResponse::Ok()
+	//HttpResponse::Ok()
 }
 
 // DATABASE postgres
@@ -105,7 +105,8 @@ async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdEr
 		.bind(&customer["sonstiges"].to_string())
 		.execute(&pool).await {
 			Ok(_) => Ok(()),
-			Err(e) => Err(Box::new(e)),
+			//Err(e) => Err(Box::new(e)),
+			Err(_) => Err(()),
 		}
 
 
