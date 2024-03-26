@@ -84,7 +84,7 @@ async fn submit(req_body: String) -> impl Responder {
 
 // DATABASE postgres
 //async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> {
-fn add_customer(c_string: String, url: String) -> Result<(), Error> {
+fn add_customer(c_string: String, url: String) -> Result<(), Error, sqlx::Error> {
 
 	let s = c_string.replace("#", "");
 	let customer = json::parse(&s).unwrap();
@@ -103,7 +103,7 @@ fn add_customer(c_string: String, url: String) -> Result<(), Error> {
 		.bind(&customer["farbe"].to_string())
 		.bind(&customer["eigeneVorstellungen"].to_string())
 		.bind(&customer["sonstiges"].to_string())
-		.execute(&pool)?;
+		.execute(&pool).await?;
 	Ok(())
 }
 
