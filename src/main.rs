@@ -2,7 +2,7 @@
 use actix_web::{put, get, App, HttpResponse, HttpServer, Responder};
 use std::process::Command;
 use actix_files as fs;
-use std::error::stdError;
+use std::error::Error as stdError;
 use openssl::ssl::{SslAcceptor, SslFiletype, SslMethod};
 
 use actix_web::HttpRequest;
