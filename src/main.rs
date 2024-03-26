@@ -83,13 +83,13 @@ async fn submit(req_body: String) -> impl Responder {
 }
 
 // DATABASE postgres
-fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> {
+async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> {
 //fn add_customer(c_string: String, url: String) -> Result<(), E> {
 
 	let s = c_string.replace("#", "");
 	let customer = json::parse(&s).unwrap();
 	
-	let pool = sqlx::postgres::PgPool::connect(&url)?;
+	let pool = sqlx::postgres::PgPool::connect(&url).await?;
 	
 	let query = "INSERT INTO kunde (anrede, name, geburtsdatum, mail, tel, vorlage, farbe, eigeneVorstellungen, sonstiges) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)";
 
