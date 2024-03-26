@@ -74,7 +74,7 @@ async fn submit(req_body: String) -> impl Responder {
 	let configuration = get_configuration().expect("Failed to read config");
 	let url = configuration.database.connection_string();
 	
-	match add_customer(req_body, url) {
+	match add_customer(req_body, url).await {
 		Ok(()) => HttpResponse::Ok(),
 		Err(_) => HttpResponse::Ok(),
 	};
@@ -83,7 +83,7 @@ async fn submit(req_body: String) -> impl Responder {
 }
 
 // DATABASE postgres
-fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> {
+async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> {
 //fn add_customer(c_string: String, url: String) -> Result<(), Error> {
 
 	let s = c_string.replace("#", "");
