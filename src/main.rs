@@ -88,7 +88,7 @@ fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> 
 	let s = c_string.replace("#", "");
 	let customer = json::parse(&s).unwrap();
 	
-	let pool = sqlx::postgres::PgPool::connect(&url).await?;
+	let pool = sqlx::postgres::PgPool::connect(&url)?;
 	
 	let query = "INSERT INTO kunde (anrede, name, geburtsdatum, mail, tel, vorlage, farbe, eigeneVorstellungen, sonstiges) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)";
 
@@ -102,8 +102,7 @@ fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> 
 		.bind(&customer["farbe"].to_string())
 		.bind(&customer["eigeneVorstellungen"].to_string())
 		.bind(&customer["sonstiges"].to_string())
-		.execute(&pool)
-		.await?;
+		.execute(&pool)?;
 	Ok(())
 }
 
