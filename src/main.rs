@@ -92,7 +92,7 @@ async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdEr
 	//let pool = sqlx::postgres::PgPool::connect(&url).await?;
 	let pool = match sqlx::postgres::PgPool::connect(&url).await {
 		Ok(p) => p,
-		Err(error) => return Err(Box::new(e)),
+		Err(e) => return Err(Box::new(e)),
 	};
 
 
