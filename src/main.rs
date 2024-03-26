@@ -43,18 +43,6 @@ pub fn get_configuration() -> Result<Settings, config::ConfigError> {
 }
 
 
-
-
-// index
-/*#[get("/")]
-async fn index() -> impl Responder {
-    //let data = fs::read_to_string("/var/www/index.html").expect("Cannot read index file");
-    let data = std::fs::read("/app/www/2LJDC.html").expect("Cannot read index file");
-    HttpResponse::Ok()
-        .content_type("text/html")
-        .body(data)
-}*/
-
 // index
 async fn index(req: HttpRequest) -> Result<fs::NamedFile, Error> {
     let file = fs::NamedFile::open("/app/www/index.html")?;
@@ -77,7 +65,7 @@ async fn submit(req_body: String) -> impl Responder {
 	//println!("{}", &url);
 	//println!("{}", &req_body);
 	
-	match add_customer(req_body, url).await {
+	match add_customer(req_body, url) {
 		Ok(()) => HttpResponse::Ok(),
 		Err(_) => HttpResponse::Ok(),
 	};
@@ -87,7 +75,6 @@ async fn submit(req_body: String) -> impl Responder {
 
 
 // UPDATE
-#[put("/update")]
 async fn update(req_body: String) -> impl Responder {
 	if req_body == "kekw" {
 		println!("update...");
@@ -100,7 +87,7 @@ async fn update(req_body: String) -> impl Responder {
 
 
 // postgres
-async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> {
+fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> {
 	let s = c_string.replace("#", "");
 	let customer = json::parse(&s).unwrap();
 	
@@ -120,9 +107,6 @@ async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdEr
 		.bind(&customer["sonstiges"].to_string())
 		.execute(&pool)
 		.await?;
-	
-	//println!("done");
-
 	Ok(())
 }
 
@@ -137,21 +121,21 @@ async fn main() -> std::io::Result<()> {
     //let address = configuration.database.connection_string();
     //println!("databse: {}", address);
 
-     let mut builder = SslAcceptor::mozilla_intermediate(SslMethod::tls()).unwrap();
+    let mut builder = SslAcceptor::mozilla_intermediate(SslMethod::tls()).unwrap();
     builder
         .set_private_key_file("key.pem", SslFiletype::PEM)
         .unwrap();
-    builder.set_certificate_chain_file("cert.pem").unwrap();
+    
+	builder.set_certificate_chain_file("cert.pem").unwrap();
 
-    HttpServer::new(|| {
-        App::new()
-            //.service(index)
-		.route("/status", web::get().to(status))
-		.route("/", web::get().to(index))
-		.service(submit)
-		.service(update)
-		.service(fs::Files::new("/", "/app/www"))
-		.default_service(web::get().to(index))
+	HttpServer::new(|| {
+		App::new()
+			.route("/status", web::get().to(status))
+			.route("/", web::get().to(index))
+			.service(submit)
+			.route("/update", web::get().to(update))
+			.service(fs::Files::new("/", "/app/www"))
+			.default_service(web::get().to(index))
 	    
     })
     .bind_openssl("0.0.0.0:8000", builder)?
