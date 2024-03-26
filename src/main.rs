@@ -71,6 +71,7 @@ async fn update(req_body: String) -> impl Responder {
 
 // submit
 async fn submit(req_body: String) -> impl Responder {
+	
 	let configuration = match get_configuration() {
 		Ok(c) => c,
 		Err(_) => return HttpResponse::BadRequest(),
