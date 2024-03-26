@@ -44,9 +44,8 @@ pub fn get_configuration() -> Result<Settings, config::ConfigError> {
 
 
 // index
-async fn index(req: HttpRequest) -> Result<fs::NamedFile, Error> {
-    let file = fs::NamedFile::open("/app/www/index.html")?;
-    Ok(file)
+async fn index() -> Result<fs::NamedFile, Error> {
+    Ok(fs::NamedFile::open("/app/www/index.html")?)
 }
 
 
@@ -56,19 +55,6 @@ async fn status() -> String {
 }
 
 // ------API------
-
-// submit
-async fn submit(req_body: String) -> impl Responder {
-	let configuration = get_configuration().expect("Failed to read config");
-	let url = configuration.database.connection_string();
-	
-	match add_customer(req_body, url) {
-		Ok(()) => HttpResponse::Ok(),
-		Err(_) => HttpResponse::Ok(),
-	};
-
-    HttpResponse::Ok()
-}
 
 
 // UPDATE
@@ -82,6 +68,19 @@ async fn update(req_body: String) -> impl Responder {
     HttpResponse::Ok()
 }
 
+
+// submit
+async fn submit(req_body: String) -> impl Responder {
+	let configuration = get_configuration().expect("Failed to read config");
+	let url = configuration.database.connection_string();
+	
+	match add_customer(req_body, url) {
+		Ok(()) => HttpResponse::Ok(),
+		Err(_) => HttpResponse::Ok(),
+	};
+
+    HttpResponse::Ok()
+}
 
 // DATABASE postgres
 fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> {
