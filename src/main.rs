@@ -90,7 +90,7 @@ fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> 
 	let customer = json::parse(&s).unwrap();
 	
 	//let pool = sqlx::postgres::PgPool::connect(&url).await?;
-	let pool = match sqlx::postgres::PgPool::connect(&url) {
+	let pool = match sqlx::postgres::PgPool::connect(&url).await {
 		Ok(p) => p,
 		Err(e) => return Err(Box::new(e)),
 	};
@@ -109,7 +109,7 @@ fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> 
 		.bind(&customer["farbe"].to_string())
 		.bind(&customer["eigeneVorstellungen"].to_string())
 		.bind(&customer["sonstiges"].to_string())
-		.execute(&pool) {
+		.execute(&pool).await {
 			Ok(_) => Ok(()),
 			Err(e) => Err(Box::new(e)),
 		}
