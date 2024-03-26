@@ -1,5 +1,5 @@
 
-use actix_web::{put, get, App, HttpResponse, HttpServer, Responder};
+use actix_web::{web, App, HttpResponse, HttpServer, Responder};
 use std::process::Command;
 use actix_files as fs;
 use std::error::Error as stdError;
@@ -7,7 +7,7 @@ use openssl::ssl::{SslAcceptor, SslFiletype, SslMethod};
 
 use actix_web::HttpRequest;
 use actix_web::Error;
-use actix_web::{web, http::header};
+
 
 //config
 #[derive(serde::Deserialize)]
