@@ -73,8 +73,8 @@ async fn update(req_body: String) -> impl Responder {
 async fn submit(req_body: String) -> impl Responder {
 	let configuration = match get_configuration() {
 		Ok(c) => c,
-		Err(_) => HttpResponse::BadRequest(),
-	}
+		Err(_) => return HttpResponse::BadRequest(),
+	};
 
 	let url = configuration.database.connection_string();
 	
