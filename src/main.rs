@@ -103,7 +103,7 @@ fn add_customer(c_string: String, url: String) -> Result<(), Error> {
 		.bind(&customer["farbe"].to_string())
 		.bind(&customer["eigeneVorstellungen"].to_string())
 		.bind(&customer["sonstiges"].to_string())
-		.execute(&pool).await?;
+		.execute(&pool)?;
 	Ok(())
 }
 
