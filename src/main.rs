@@ -114,14 +114,7 @@ async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdEr
 			Err(e) => Err(Box::new(e)),
 		}
 
-
-
-
-	//Ok(())
 }
-
-
-
 
 
 #[actix_web::main]
