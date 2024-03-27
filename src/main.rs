@@ -13,7 +13,8 @@ use actix_web::Error;
 #[derive(serde::Deserialize)]
 pub struct Settings{
 	pub database: DatabaseSettings,
-	pub application_port: u16
+	pub application_port: u16,
+	pub password: String
 
 }
 
@@ -42,13 +43,6 @@ pub fn get_configuration() -> Result<Settings, config::ConfigError> {
 	settings.try_deserialize::<Settings>()
 }
 
-// get database config
-pub fn get_database_config() -> Result<DatabaseSettings, config::ConfigError> {
-	let settings = config::Config::builder()
-		.add_source(config::File::new("/app/database_config.yaml", config::FileFormat::Yaml))
-		.build()?;
-	settings.try_deserialize::<DatabaseSettings>()
-}
 
 // index
 async fn index() -> Result<fs::NamedFile, Error> {
