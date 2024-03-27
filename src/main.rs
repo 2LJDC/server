@@ -109,6 +109,10 @@ async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdEr
 		.bind(&data.1.to_string())		
 		.bind(&data.2.to_string())
 		.bind(&data.3.to_string())
+		.execute(&pool).await {
+			Ok(_) => Ok(()),
+			Err(e) => Err(Box::new(e)),
+		}
 
 	/*let query = "INSERT INTO kunde (anrede, name, geburtsdatum, mail, tel, vorlage, farbe, eigeneVorstellungen, sonstiges) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)";
 
