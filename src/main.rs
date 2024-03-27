@@ -42,6 +42,13 @@ pub fn get_configuration() -> Result<Settings, config::ConfigError> {
 	settings.try_deserialize::<Settings>()
 }
 
+// get database config
+pub fn get_database_config() -> Result<DatabaseSettings, config::ConfigError> {
+	let settings = config::Config::builder()
+		.add_source(config::File::new("/app/database_config.yaml", config::FileFormat::Yaml))
+		.build()?;
+	settings.try_deserialize::<DatabaseSettings>()
+}
 
 // index
 async fn index() -> Result<fs::NamedFile, Error> {
@@ -72,7 +79,7 @@ async fn update(req_body: String) -> impl Responder {
 // submit
 async fn submit(req_body: String) -> impl Responder {
 	/*
-	let configuration = match get_configuration() {
+	let configuration = match get_database_config() {
 		Ok(c) => c,
 		Err(_) => return HttpResponse::BadRequest(),
 	};*/
@@ -92,7 +99,7 @@ async fn submit(req_body: String) -> impl Responder {
 async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> {
 //fn add_customer(c_string: String, url: String) -> Result<(), Error> {
 
-	let s = c_string.replace("#", "");
+	//let s = c_string.replace("#", "");
 	//let customer = json::parse(&s).unwrap();
 	
 	//let pool = sqlx::postgres::PgPool::connect(&url).await?;
@@ -102,16 +109,8 @@ async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdEr
 	};
 
 
-
 	let parts = c_string.split("|");
 	let data: Vec<&str> = parts.collect();
-	//let data: parts.collect::<Vec<&str>>();
-
-	//let mut data: Vec<String> = vec!["".to_string(); 5];
-
-	//data = parts.collect();
-
-
 
 
 	let query = "INSERT INTO kunde (Kundennummer, Name, Email, Nachricht, Status) VALUES ($1, $2, $3, $4, $5)";
@@ -126,23 +125,6 @@ async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdEr
 			Ok(_) => Ok(()),
 			Err(e) => Err(Box::new(e)),
 		}
-
-	/*let query = "INSERT INTO kunde (anrede, name, geburtsdatum, mail, tel, vorlage, farbe, eigeneVorstellungen, sonstiges) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)";
-
-	match sqlx::query(query)
-		.bind(&customer["anrede"].to_string())
-		.bind(&customer["name"].to_string())
-		.bind(&customer["geburtstag"].to_string())
-		.bind(&customer["mail"].to_string())
-		.bind(&customer["tel"].to_string())
-		.bind(&customer["vorlage"].to_string())
-		.bind(&customer["farbe"].to_string())
-		.bind(&customer["eigeneVorstellungen"].to_string())
-		.bind(&customer["sonstiges"].to_string())
-		.execute(&pool).await {
-			Ok(_) => Ok(()),
-			Err(e) => Err(Box::new(e)),
-		}*/
 
 }
 
