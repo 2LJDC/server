@@ -102,7 +102,7 @@ async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdEr
 
 	let parts = c_string.split("|");
 
-	let mut data: Vec<String> = vec!["",5];
+	let mut data: Vec<str> = vec!["",5];
 
 	data = parts.collect();
 
