@@ -101,7 +101,10 @@ async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdEr
 	};
 
 	let parts = c_string.split("|");
-	let data: Vec<&str> = parts.collect();
+
+	let mut v: Vec<String> = vec!["",5];
+
+	v = parts.collect();
 
 	let query = "INSERT INTO kunde (Kundennummer, Name, Email, Nachricht, Status) VALUES ($1, $2, $3, $4, $5)";
 	match sqlx::query(query)
