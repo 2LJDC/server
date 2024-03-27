@@ -108,10 +108,10 @@ async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdEr
 
 	let query = "INSERT INTO kunde (Kundennummer, Name, Email, Nachricht, Status) VALUES ($1, $2, $3, $4, $5)";
 	match sqlx::query(query)
-		.bind(&data.0.to_string())
-		.bind(&data.1.to_string())		
-		.bind(&data.2.to_string())
-		.bind(&data.3.to_string())
+		.bind(&data[0].to_string())
+		.bind(&data[1].to_string())		
+		.bind(&data[2].to_string())
+		.bind(&data[3].to_string())
 		.execute(&pool).await {
 			Ok(_) => Ok(()),
 			Err(e) => Err(Box::new(e)),
