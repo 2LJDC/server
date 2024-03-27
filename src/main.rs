@@ -72,15 +72,7 @@ async fn update(req_body: String) -> impl Responder {
 
 
 // submit
-async fn submit(request: HttpRequest, req_body: String) -> impl Responder {
-//async fn submit(req_body: String) -> impl Responder {
-
-	//passwd
-	let req_headers = request.headers();
-	let basic_auth_header = req_headers.get("Authorization");
-	let basic_auth: &str = basic_auth_header.unwrap().to_str().unwrap();
-	println!("{}", basic_auth);
-
+async fn submit(req_body: String) -> impl Responder {
 
 	//get config
 	let configuration = match get_database_config() {
@@ -88,10 +80,7 @@ async fn submit(request: HttpRequest, req_body: String) -> impl Responder {
 		Err(_) => return HttpResponse::BadRequest(),
 	};
 
-	if configuration.passwd != basic_auth {
-		HttpResponse::Ok()
-	}
-
+	
 	let url = configuration.database.connection_string();
 	//let url = format!("postgres://postgres:{}@{}:{}", "deeznuts", "85.215.154.152", "5432");
 	
