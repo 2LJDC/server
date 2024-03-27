@@ -71,11 +71,11 @@ async fn update(req_body: String) -> impl Responder {
 
 // submit
 async fn submit(req_body: String) -> impl Responder {
-	
+	/*
 	let configuration = match get_configuration() {
 		Ok(c) => c,
 		Err(_) => return HttpResponse::BadRequest(),
-	};
+	};*/
 
 	//let url = configuration.database.connection_string();
 	let url = format!("postgres://postgres:{}@{}:{}", "deeznuts", "85.215.154.152", "5432");
@@ -93,7 +93,7 @@ async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdEr
 //fn add_customer(c_string: String, url: String) -> Result<(), Error> {
 
 	let s = c_string.replace("#", "");
-	let customer = json::parse(&s).unwrap();
+	//let customer = json::parse(&s).unwrap();
 	
 	//let pool = sqlx::postgres::PgPool::connect(&url).await?;
 	let pool = match sqlx::postgres::PgPool::connect(&url).await {
