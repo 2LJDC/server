@@ -71,11 +71,13 @@ async fn update(req_body: String) -> impl Responder {
 
 
 // submit
-async fn submit(req_body: String) -> impl Responder {
+async fn submit(request: HttpRequest, req_body: String) -> impl Responder {
+//async fn submit(req_body: String) -> impl Responder {
 	//passwd
 
 
 
+	
 	//get config
 	let configuration = match get_database_config() {
 		Ok(c) => c,
@@ -113,7 +115,6 @@ async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdEr
 
 	let query = "INSERT INTO kunde (Kundennummer, Name, Email, Nachricht, Status) VALUES ($1, $2, $3, $4, $5)";
 	match sqlx::query(query)
-		//.bind(&data[0].to_string())
 		.bind("0".to_string())
 		.bind(&data[0].to_string())		
 		.bind(&data[1].to_string())
