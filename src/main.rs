@@ -100,9 +100,17 @@ async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdEr
 		Err(e) => return Err(Box::new(e)),
 	};
 
+	let parts = c_string.split("|");
+	let data: Vec<&str> = parts.collect();
 
-	
-	let query = "INSERT INTO kunde (anrede, name, geburtsdatum, mail, tel, vorlage, farbe, eigeneVorstellungen, sonstiges) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)";
+	let query = "INSERT INTO kunde (Kundennummer, Name, Email, Nachricht, Status) VALUES ($1, $2, $3, $4, $5)";
+	match sqlx::query(query)
+		.bind(&data.0.to_string())
+		.bind(&data.1.to_string())		
+		.bind(&data.2.to_string())
+		.bind(&data.3.to_string())
+
+	/*let query = "INSERT INTO kunde (anrede, name, geburtsdatum, mail, tel, vorlage, farbe, eigeneVorstellungen, sonstiges) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)";
 
 	match sqlx::query(query)
 		.bind(&customer["anrede"].to_string())
@@ -117,7 +125,7 @@ async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdEr
 		.execute(&pool).await {
 			Ok(_) => Ok(()),
 			Err(e) => Err(Box::new(e)),
-		}
+		}*/
 
 }
 
@@ -140,7 +148,7 @@ async fn main() -> std::io::Result<()> {
 		App::new()
 			.route("/status", web::get().to(status))
 			.route("/", web::get().to(index))
-			.route("/submit", web::get().to(submit))
+			.route("/submit", web::put().to(submit))
 			.route("/update", web::get().to(update))
 			.service(fs::Files::new("/", "/app/www"))
 			.default_service(web::get().to(index))
