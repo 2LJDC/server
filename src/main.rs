@@ -72,14 +72,18 @@ async fn update(req_body: String) -> impl Responder {
 
 // submit
 async fn submit(req_body: String) -> impl Responder {
-	/*
+	//passwd
+
+
+
+	//get config
 	let configuration = match get_database_config() {
 		Ok(c) => c,
 		Err(_) => return HttpResponse::BadRequest(),
-	};*/
+	};
 
-	//let url = configuration.database.connection_string();
-	let url = format!("postgres://postgres:{}@{}:{}", "deeznuts", "85.215.154.152", "5432");
+	let url = configuration.database.connection_string();
+	//let url = format!("postgres://postgres:{}@{}:{}", "deeznuts", "85.215.154.152", "5432");
 	
 	match add_customer(req_body, url).await {
 		Ok(()) => HttpResponse::Ok(),
