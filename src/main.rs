@@ -2,7 +2,7 @@
 use actix_web::{web, App, HttpResponse, HttpServer, Responder};
 use std::process::Command;
 use actix_files as fs;
-use std::error::Error as stdError;
+//use std::error::Error as stdError;
 use openssl::ssl::{SslAcceptor, SslFiletype, SslMethod};
 
 //use actix_web::HttpRequest;
@@ -71,7 +71,6 @@ async fn update(req_body: String) -> impl Responder {
 }
 
 
-
 // submit
 async fn submit(req_body: String) -> impl Responder {
 
@@ -81,9 +80,7 @@ async fn submit(req_body: String) -> impl Responder {
 		Err(_) => return HttpResponse::BadRequest(),
 	};
 
-
 	let url = configuration.database.connection_string();
-	//let url = format!("postgres://postgres:{}@{}:{}", "deeznuts", "85.215.154.152", "5432");
 	
 	match add_customer(req_body, &url).await {
 		Ok(()) => HttpResponse::Ok(),
@@ -94,47 +91,8 @@ async fn submit(req_body: String) -> impl Responder {
 }
 
 
-/*
-// DATABASE postgres
-async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> {
-//fn add_customer(c_string: String, url: String) -> Result<(), Error> {
-
-	//let s = c_string.replace("#", "");
-	//let customer = json::parse(&s).unwrap();
-	
-	//let pool = sqlx::postgres::PgPool::connect(&url).await?;
-	let pool = match sqlx::postgres::PgPool::connect(&url).await {
-		Ok(p) => p,
-		Err(e) => return Err(Box::new(e)),
-	};
-
-
-	let parts = c_string.split("|");
-	let data: Vec<&str> = parts.collect();
-
-
-	let query = "INSERT INTO kunde (Kundennummer, Name, Email, Nachricht, Status) VALUES ($1, $2, $3, $4, $5)";
-	match sqlx::query(query)
-		.bind("0".to_string())
-		.bind(&data[0].to_string())		
-		.bind(&data[1].to_string())
-		.bind(&data[2].to_string())
-		.bind("nix".to_string())
-		.execute(&pool).await {
-			Ok(_) => Ok(()),
-			Err(e) => Err(Box::new(e)),
-		}
-
-}
-*/
-
-
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    //let configuration = get_configuration().expect("Failed to read config");
-    //let address = format!("{}:{}", configuration.database.host, configuration.database.port);
-    //let address = configuration.database.connection_string();
-    //println!("databse: {}", address);
 
     let mut builder = SslAcceptor::mozilla_intermediate(SslMethod::tls()).unwrap();
     builder
