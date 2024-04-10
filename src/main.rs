@@ -8,6 +8,7 @@ use openssl::ssl::{SslAcceptor, SslFiletype, SslMethod};
 //use actix_web::HttpRequest;
 use actix_web::Error;
 
+use jason_to_postgres::add_customer;
 
 //config
 #[derive(serde::Deserialize)]
@@ -93,7 +94,7 @@ async fn submit(req_body: String) -> impl Responder {
 }
 
 
-
+/*
 // DATABASE postgres
 async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> {
 //fn add_customer(c_string: String, url: String) -> Result<(), Error> {
@@ -125,7 +126,7 @@ async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdEr
 		}
 
 }
-
+*/
 
 
 #[actix_web::main]
